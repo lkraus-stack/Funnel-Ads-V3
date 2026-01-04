@@ -1,0 +1,136 @@
+/**
+ * Card Styles
+ * 
+ * TEMPLATE GUIDE:
+ * Glasmorphism und Karten-Styles.
+ * Verwendet CSS-Variablen für konsistentes Design.
+ */
+
+.card {
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========================================
+   PADDING VARIANTS
+   ======================================== */
+.padding-none {
+  padding: 0;
+}
+
+.padding-sm {
+  padding: var(--space-md);
+}
+
+.padding-md {
+  padding: var(--space-xl);
+}
+
+.padding-lg {
+  padding: var(--space-2xl);
+}
+
+/* ========================================
+   VARIANT: DEFAULT
+   ======================================== */
+.default {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+}
+
+.default:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+}
+
+/* ========================================
+   VARIANT: GLASS
+   ======================================== */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-default);
+}
+
+.glass:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-hover);
+}
+
+/* Gradient Border Effect */
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--primary-rgb), 0.2),
+    transparent 50%,
+    rgba(var(--secondary-rgb), 0.2)
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.glass:hover::before {
+  opacity: 1;
+}
+
+/* ========================================
+   VARIANT: GRADIENT
+   ======================================== */
+.gradient {
+  background: var(--gradient-card);
+  border: 1px solid var(--border-default);
+}
+
+.gradient::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+/* ========================================
+   VARIANT: BORDERED
+   ======================================== */
+.bordered {
+  background: transparent;
+  border: 2px solid var(--border-default);
+}
+
+.bordered:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.1);
+}
+
+/* ========================================
+   GLOW EFFECT
+   ======================================== */
+.glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.glow:hover {
+  box-shadow: var(--shadow-glow-strong);
+}
+

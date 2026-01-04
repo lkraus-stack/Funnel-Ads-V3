@@ -1,0 +1,40 @@
+/**
+ * FAQ Section Styles
+ */
+
+.section {
+  padding: var(--space-4xl) 0;
+}
+
+.container {
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.title {
+  font-size: clamp(var(--text-2xl), 5vw, var(--text-4xl));
+  margin-bottom: var(--space-md);
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   ACCORDION WRAPPER
+   ======================================== */
+.accordionWrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+

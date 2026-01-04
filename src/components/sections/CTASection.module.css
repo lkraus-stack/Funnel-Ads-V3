@@ -1,0 +1,92 @@
+/**
+ * CTASection Styles
+ */
+
+.section {
+  padding: var(--space-4xl) 0;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    var(--bg-dark) 0%,
+    var(--bg-darker) 100%
+  );
+}
+
+/* ========================================
+   BACKGROUND EFFECTS
+   ======================================== */
+.bgGlow {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(var(--primary-rgb), 0.2) 0%,
+    transparent 60%
+  );
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.bgGlow2 {
+  position: absolute;
+  top: 50%;
+  right: 20%;
+  transform: translate(50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(var(--secondary-rgb), 0.15) 0%,
+    transparent 60%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* ========================================
+   CONTAINER
+   ======================================== */
+.container {
+  max-width: var(--container-md);
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-lg);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   CONTENT
+   ======================================== */
+.title {
+  font-size: clamp(var(--text-2xl), 5vw, var(--text-4xl));
+  margin-bottom: var(--space-lg);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2xl);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-2xl) var(--space-md);
+  }
+}
+

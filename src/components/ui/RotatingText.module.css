@@ -1,0 +1,39 @@
+/**
+ * RotatingText Styles
+ * 
+ * TEMPLATE GUIDE:
+ * Der rotierende Text hat einen Gradient-Effekt.
+ * Anpassbar über CSS-Variablen.
+ */
+
+.container {
+  display: inline-block;
+  position: relative;
+  min-width: 200px;
+  height: 1.2em;
+  vertical-align: bottom;
+}
+
+.word {
+  position: absolute;
+  left: 0;
+  white-space: nowrap;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Responsive width */
+@media (max-width: 768px) {
+  .container {
+    display: block;
+    min-width: 100%;
+    text-align: center;
+  }
+  
+  .word {
+    position: relative;
+  }
+}
+

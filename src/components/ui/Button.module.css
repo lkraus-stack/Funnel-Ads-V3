@@ -1,0 +1,133 @@
+/**
+ * Button Styles
+ * 
+ * TEMPLATE GUIDE:
+ * Styling für die Button-Komponente.
+ * Verwendet CSS-Variablen aus variables.css für einfache Anpassung.
+ */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   SIZE VARIANTS
+   ======================================== */
+.sm {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--text-sm);
+}
+
+.md {
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--text-base);
+}
+
+.lg {
+  padding: var(--space-lg) var(--space-2xl);
+  font-size: var(--text-lg);
+}
+
+/* ========================================
+   VARIANT: PRIMARY
+   ======================================== */
+.primary {
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  border: none;
+  box-shadow: var(--shadow-md), 0 0 20px rgba(var(--primary-rgb), 0.3);
+}
+
+.primary:hover:not(:disabled) {
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(var(--primary-rgb), 0.5);
+}
+
+/* Shimmer Effect */
+.primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.primary:hover::before {
+  left: 100%;
+}
+
+/* ========================================
+   VARIANT: SECONDARY
+   ======================================== */
+.secondary {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-default);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--bg-card-hover);
+  border-color: var(--border-hover);
+}
+
+/* ========================================
+   VARIANT: OUTLINE
+   ======================================== */
+.outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.outline:hover:not(:disabled) {
+  background: rgba(var(--primary-rgb), 0.1);
+  border-color: var(--primary-light);
+  color: var(--primary-light);
+}
+
+/* ========================================
+   VARIANT: GHOST
+   ======================================== */
+.ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+}
+
+.ghost:hover:not(:disabled) {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+   ICONS
+   ======================================== */
+.icon,
+.iconRight {
+  flex-shrink: 0;
+}
+

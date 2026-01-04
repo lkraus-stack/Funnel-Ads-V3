@@ -1,0 +1,97 @@
+/**
+ * BenefitsGrid Section Styles
+ */
+
+.section {
+  padding: var(--space-4xl) 0;
+  background: var(--bg-darker);
+}
+
+.container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.title {
+  font-size: clamp(var(--text-2xl), 5vw, var(--text-4xl));
+  margin-bottom: var(--space-md);
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   GRID
+   ======================================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+/* ========================================
+   CARD
+   ======================================== */
+.card {
+  text-align: center;
+  height: 100%;
+}
+
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: rgba(var(--primary-rgb), 0.1);
+  border-radius: var(--radius-xl);
+  color: var(--primary);
+  margin-bottom: var(--space-lg);
+  transition: all var(--transition-base);
+}
+
+.card:hover .iconWrapper {
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-glow);
+}
+
+.cardTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-sm);
+}
+
+.cardDescription {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+

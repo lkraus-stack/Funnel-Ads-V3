@@ -1,0 +1,397 @@
+/**
+ * Global Styles - Base Styles & Reset
+ * 
+ * TEMPLATE GUIDE:
+ * Diese Datei enthält den CSS-Reset und globale Basis-Styles.
+ * Für Farbanpassungen nutze variables.css.
+ */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* CSS Variables Import */
+@import './variables.css';
+@import './responsive.css';
+
+/* ========================================
+   CSS RESET
+   ======================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ========================================
+   TYPOGRAFIE
+   ======================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: clamp(var(--text-4xl), 8vw, var(--text-7xl));
+}
+
+h2 {
+  font-size: clamp(var(--text-2xl), 5vw, var(--text-5xl));
+}
+
+h3 {
+  font-size: clamp(var(--text-xl), 3vw, var(--text-3xl));
+}
+
+h4 {
+  font-size: var(--text-xl);
+}
+
+p {
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-light);
+}
+
+/* ========================================
+   LINKS & BUTTONS RESET
+   ======================================== */
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* ========================================
+   LISTEN RESET
+   ======================================== */
+ul, ol {
+  list-style: none;
+}
+
+/* ========================================
+   MEDIEN
+   ======================================== */
+img, video, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ========================================
+   FORMULARE
+   ======================================== */
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--border-default);
+  outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary);
+}
+
+/* ========================================
+   UTILITY KLASSEN
+   ======================================== */
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+}
+
+.container-sm {
+  max-width: var(--container-md);
+}
+
+.container-lg {
+  max-width: var(--container-2xl);
+}
+
+/* Text Utilities */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+/* Flexbox Utilities */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-sm {
+  gap: var(--space-sm);
+}
+
+.gap-md {
+  gap: var(--space-md);
+}
+
+.gap-lg {
+  gap: var(--space-lg);
+}
+
+.gap-xl {
+  gap: var(--space-xl);
+}
+
+/* Grid Utilities */
+.grid {
+  display: grid;
+}
+
+/* Section Spacing */
+.section {
+  padding-top: var(--space-4xl);
+  padding-bottom: var(--space-4xl);
+}
+
+.section-sm {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+/* ========================================
+   GLASMORPHISM EFFECT
+   ======================================== */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: var(--blur-md);
+  -webkit-backdrop-filter: var(--blur-md);
+  border: 1px solid var(--border-default);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: var(--blur-lg);
+  -webkit-backdrop-filter: var(--blur-lg);
+  border: 1px solid var(--border-default);
+}
+
+/* ========================================
+   GLOW EFFECTS
+   ======================================== */
+.glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.glow-strong {
+  box-shadow: var(--shadow-glow-strong);
+}
+
+/* ========================================
+   SCROLLBAR STYLING
+   ======================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-card);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bg-card-hover);
+}
+
+/* ========================================
+   SELECTION
+   ======================================== */
+::selection {
+  background: rgba(var(--primary-rgb), 0.3);
+  color: var(--text-primary);
+}
+
+/* ========================================
+   FOCUS VISIBLE (Accessibility)
+   ======================================== */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   ANIMATIONS KEYFRAMES
+   ======================================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--transition-slow) ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+

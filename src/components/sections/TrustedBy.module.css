@@ -1,0 +1,123 @@
+/**
+ * TrustedBy Section Styles
+ * 
+ * TEMPLATE GUIDE:
+ * Endlos scrollende Logo-Marquee.
+ */
+
+.section {
+  padding: var(--space-3xl) 0;
+  border-top: 1px solid var(--border-default);
+  border-bottom: 1px solid var(--border-default);
+  background: var(--bg-darker);
+}
+
+.container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  text-align: center;
+}
+
+.title {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xl);
+}
+
+/* ========================================
+   MARQUEE ANIMATION
+   ======================================== */
+.marqueeWrapper {
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+}
+
+.marquee {
+  display: flex;
+  gap: var(--space-3xl);
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ========================================
+   LOGO ITEMS
+   ======================================== */
+.logoItem {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+.logoPlaceholder {
+  padding: var(--space-md) var(--space-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: all var(--transition-base);
+}
+
+.logoPlaceholder:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+/* Wenn echte Logo-Bilder verwendet werden */
+.logoImage {
+  height: 32px;
+  width: auto;
+  filter: grayscale(1) opacity(0.5);
+  transition: all var(--transition-base);
+}
+
+.logoItem:hover .logoImage {
+  filter: grayscale(0) opacity(1);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .marquee {
+    gap: var(--space-xl);
+  }
+
+  .logoPlaceholder {
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-xs);
+  }
+}
+
