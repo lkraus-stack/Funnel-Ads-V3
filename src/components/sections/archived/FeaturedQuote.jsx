@@ -4,6 +4,9 @@
  * TEMPLATE GUIDE:
  * Großes einzelnes Testimonial-Zitat zwischen ROI Calculator und Feature Showcases.
  * Entspricht dem Appointwise-Design.
+ * 
+ * ARCHIVIERT: Diese Sektion wurde aus dem aktiven Funnel entfernt,
+ * bleibt aber für zukünftige Verwendung erhalten.
  */
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';

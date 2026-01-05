@@ -10,10 +10,12 @@
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
 import Button from '../ui/Button';
+import { useContactModal } from '../../contexts/ContactModalContext';
 import { whyUsContent } from '../../data/content';
 import styles from './WhyUs.module.css';
 
 export default function WhyUs() {
+  const { openModal } = useContactModal();
   // Dynamic Icon Component
   const DynamicIcon = ({ name, ...props }) => {
     const IconComponent = Icons[name];
@@ -44,7 +46,7 @@ export default function WhyUs() {
           viewport={{ once: true }}
         >
           <h2 className={styles.title}>{whyUsContent.title}</h2>
-          <Button href="#contact">{whyUsContent.cta}</Button>
+          <Button onClick={openModal}>{whyUsContent.cta}</Button>
         </motion.div>
 
         {/* Features Grid */}

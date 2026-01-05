@@ -182,3 +182,68 @@
   --breakpoint-2xl: 1536px;
 */
 
+/* ========================================
+   HELLER MODUS (LIGHT MODE)
+   ======================================== */
+[data-theme="light"] {
+  /* Primäre Farben bleiben gleich (Grün) */
+  --primary: #10b981;
+  --primary-light: #34d399;
+  --primary-dark: #059669;
+  --primary-rgb: 16, 185, 129;
+
+  /* Sekundäre Farben bleiben gleich (Blau) */
+  --secondary: #60a5fa;
+  --secondary-light: #93c5fd;
+  --secondary-dark: #3b82f6;
+  --secondary-rgb: 96, 165, 250;
+
+  /* Akzentfarben bleiben gleich */
+  --accent: #34d399;
+  --accent-light: #6ee7b7;
+  --accent-dark: #10b981;
+  --accent-rgb: 52, 211, 153;
+
+  /* ========================================
+     HINTERGRUND-FARBEN (HELL)
+     ======================================== */
+  --bg-dark: #ffffff;          /* Haupthintergrund - Weiß */
+  --bg-darker: #f5f5f7;        /* Leicht grauer für Kontrast */
+  --bg-card: #ffffff;          /* Karten-Hintergrund - Weiß */
+  --bg-card-hover: #f9fafb;    /* Karten-Hover-Zustand - Sehr helles Grau */
+  --bg-elevated: #f9fafb;      /* Erhöhte Elemente - Sehr helles Grau */
+
+  /* ========================================
+     TEXT-FARBEN (DUNKEL)
+     ======================================== */
+  --text-primary: #1f2937;     /* Haupttext - Dunkelgrau */
+  --text-secondary: #4b5563;    /* Sekundärtext - Mittelgrau */
+  --text-muted: #6b7280;        /* Gedämpfter Text - Hellgrau */
+  --text-inverse: #ffffff;      /* Invertierter Text (auf dunklen Buttons) */
+
+  /* ========================================
+     BORDER-FARBEN (DUNKEL)
+     ======================================== */
+  --border-default: rgba(0, 0, 0, 0.1);
+  --border-hover: rgba(0, 0, 0, 0.2);
+  --border-active: rgba(16, 185, 129, 0.5);
+
+  /* ========================================
+     GRADIENTEN (ANGEPASST)
+     ======================================== */
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+  --gradient-primary-reverse: linear-gradient(135deg, var(--secondary), var(--primary));
+  --gradient-glow: radial-gradient(circle, rgba(var(--primary-rgb), 0.15) 0%, transparent 70%);
+  --gradient-hero: radial-gradient(ellipse at top, rgba(var(--primary-rgb), 0.08) 0%, transparent 50%);
+  --gradient-card: linear-gradient(180deg, rgba(0,0,0,0.02) 0%, transparent 100%);
+
+  /* ========================================
+     SCHATTEN (ANGEPASST FÜR HELLEN MODUS)
+     ======================================== */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 40px rgba(var(--primary-rgb), 0.2);
+  --shadow-glow-strong: 0 0 60px rgba(var(--primary-rgb), 0.3);
+}
+

@@ -137,8 +137,29 @@ input:focus, textarea:focus, select:focus {
   max-width: var(--container-xl);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--space-lg);
-  padding-right: var(--space-lg);
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: var(--space-lg);
+    padding-right: var(--space-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
+  }
 }
 
 .container-sm {
@@ -236,11 +257,20 @@ input:focus, textarea:focus, select:focus {
   border: 1px solid var(--border-default);
 }
 
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--border-default);
+}
+
 .glass-dark {
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: var(--blur-lg);
   -webkit-backdrop-filter: var(--blur-lg);
   border: 1px solid var(--border-default);
+}
+
+[data-theme="light"] .glass-dark {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* ========================================
@@ -273,6 +303,18 @@ input:focus, textarea:focus, select:focus {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--bg-card-hover);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================

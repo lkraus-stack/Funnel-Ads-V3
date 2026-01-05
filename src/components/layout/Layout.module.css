@@ -10,6 +10,12 @@
 
 .main {
   flex: 1;
-  padding-top: 80px; /* Header-Höhe */
+  padding-top: 60px; /* Header-Höhe Mobile */
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding-top: 80px; /* Header-Höhe Desktop */
+  }
 }
 

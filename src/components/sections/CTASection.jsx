@@ -12,10 +12,12 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Button from '../ui/Button';
+import { useContactModal } from '../../contexts/ContactModalContext';
 import { ctaContent } from '../../data/content';
 import styles from './CTASection.module.css';
 
 export default function CTASection() {
+  const { openModal } = useContactModal();
   return (
     <section className={styles.section} id="contact">
       {/* Background Effects */}
@@ -55,7 +57,7 @@ export default function CTASection() {
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <Button size="lg" href={ctaContent.ctaHref} iconRight={ArrowRight}>
+          <Button size="lg" onClick={openModal} iconRight={ArrowRight}>
             {ctaContent.cta}
           </Button>
         </motion.div>

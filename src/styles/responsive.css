@@ -55,11 +55,18 @@
    RESPONSIVE CONTAINER
    ======================================== */
 .container {
-  padding-left: var(--space-md);
-  padding-right: var(--space-md);
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
 }
 
 @media (min-width: 640px) {
+  .container {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+}
+
+@media (min-width: 768px) {
   .container {
     padding-left: var(--space-lg);
     padding-right: var(--space-lg);
@@ -76,9 +83,15 @@
 /* ========================================
    RESPONSIVE TYPOGRAPHY
    ======================================== */
-@media (max-width: 767px) {
+@media (max-width: 480px) {
   html {
     font-size: 14px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  html {
+    font-size: 15px;
   }
 }
 
@@ -91,7 +104,14 @@
 /* ========================================
    RESPONSIVE SPACING
    ======================================== */
-@media (max-width: 767px) {
+@media (max-width: 480px) {
+  .section {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
   .section {
     padding-top: var(--space-2xl);
     padding-bottom: var(--space-2xl);

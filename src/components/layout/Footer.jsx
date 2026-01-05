@@ -12,10 +12,15 @@
  */
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';
+import { useTheme } from '../../contexts/ThemeContext';
 import { footerContent } from '../../data/content';
+import logoWhite from '../../assets/LogoFrancoConsulting-weiß.png';
+import logoBlack from '../../assets/LogoFrancoConsulting-schwarz.png';
 import styles from './Footer.module.css';
 
 export default function Footer() {
+  const { theme } = useTheme();
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -50,7 +55,11 @@ export default function Footer() {
           {/* Brand Column */}
           <motion.div className={styles.brandColumn} variants={itemVariants}>
             <a href="/" className={styles.logo}>
-              {footerContent.logo}
+              <img 
+                src={theme === 'dark' ? logoWhite : logoBlack} 
+                alt={footerContent.logo}
+                className={styles.logoImage}
+              />
             </a>
             <p className={styles.description}>
               {footerContent.description}

@@ -12,9 +12,11 @@ import { ArrowRight, Hotel, TrendingUp, Percent, Building2, Target, DollarSign, 
 import Button from '../ui/Button';
 import Card from '../ui/Card';
 import AnimatedCounter from '../ui/AnimatedCounter';
+import { useContactModal } from '../../contexts/ContactModalContext';
 import styles from './ROICalculator.module.css';
 
 export default function ROICalculator() {
+  const { openModal } = useContactModal();
   // State für Slider-Werte
   const [values, setValues] = useState({
     bookingValue: 600,
@@ -460,7 +462,7 @@ export default function ROICalculator() {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <Button href="#contact" size="lg" className={styles.cta}>
+            <Button onClick={openModal} size="lg" className={styles.cta}>
               Jetzt unabhängig werden
               <ArrowRight size={20} />
             </Button>

@@ -9,6 +9,9 @@
  * - Hover-Animation
  * 
  * Texte aus data/content.js (benefitsGridContent)
+ * 
+ * ARCHIVIERT: Diese Sektion wurde aus dem aktiven Funnel entfernt,
+ * bleibt aber für zukünftige Verwendung erhalten.
  */
 import { motion } from 'framer-motion';
 import * as Icons from 'lucide-react';

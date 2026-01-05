@@ -11,12 +11,10 @@
 export { default as Hero } from './Hero';
 export { default as TrustedBy } from './TrustedBy';
 export { default as FeaturesComparison } from './FeaturesComparison';
-export { default as FeaturedQuote } from './FeaturedQuote';
 export { default as FeatureShowcase } from './FeatureShowcase';
 export { default as ROICalculator } from './ROICalculator';
-export { default as ROIBenefits } from './ROIBenefits';
-export { default as BenefitsGrid } from './BenefitsGrid';
 export { default as WhyUs } from './WhyUs';
 export { default as Testimonials } from './Testimonials';
 export { default as FAQ } from './FAQ';
+export { default as ContactForm } from './ContactForm';
 export { default as CTASection } from './CTASection';

@@ -8,6 +8,9 @@
  * 3. Maximize capacity - Globe-Grafik
  * 
  * Alle mit Animationen und speziell für die Hotelbranche angepasst
+ * 
+ * ARCHIVIERT: Diese Sektion wurde aus dem aktiven Funnel entfernt,
+ * bleibt aber für zukünftige Verwendung erhalten.
  */
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
@@ -24,13 +27,13 @@ export default function ROIBenefits() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             // Staggered animation trigger
-            setTimeout(() => setIsVisible([true, false, false]), 100);
-            setTimeout(() => setIsVisible([true, true, false]), 300);
-            setTimeout(() => setIsVisible([true, true, true]), 500);
+            setTimeout(() => setIsVisible([true, false, false]), 200);
+            setTimeout(() => setIsVisible([true, true, false]), 400);
+            setTimeout(() => setIsVisible([true, true, true]), 600);
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -72,9 +75,9 @@ export default function ROIBenefits() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className={styles.title}>Berechne deine ROI</h2>
+          <h2 className={styles.title}>Ihre ROI-Vorteile im Überblick</h2>
           <p className={styles.subtitle}>
-            Maximiere Buchungen und reduziere Abhängigkeit durch intelligente Ads
+            So steigern Sie Direktbuchungen, verbessern Margen und reduzieren Abhängigkeiten
           </p>
         </motion.div>
 
@@ -91,7 +94,7 @@ export default function ROIBenefits() {
             <Card variant="glass" padding="lg" className={styles.card}>
               <div className={styles.cardHeader}>
                 <span className={styles.cardNumber}>01.</span>
-                <h3 className={styles.cardTitle}>Increase conversions</h3>
+                <h3 className={styles.cardTitle}>Direktbuchungsquote steigern</h3>
               </div>
 
               {/* Bar Chart */}
@@ -103,8 +106,12 @@ export default function ROIBenefits() {
                       style={{
                         height: isVisible[0] ? '35%' : '0%',
                       }}
-                    />
-                    <span className={styles.barLabel}>HUMAN CVR</span>
+                    >
+                      {isVisible[0] && (
+                        <span className={styles.barPercentage}>35%</span>
+                      )}
+                    </div>
+                    <span className={styles.barLabel}>OHNE STRATEGIE</span>
                   </div>
                   <div className={styles.barGroup}>
                     <div 
@@ -112,8 +119,12 @@ export default function ROIBenefits() {
                       style={{
                         height: isVisible[0] ? '75%' : '0%',
                       }}
-                    />
-                    <span className={styles.barLabel}>AI CVR</span>
+                    >
+                      {isVisible[0] && (
+                        <span className={styles.barPercentage}>75%</span>
+                      )}
+                    </div>
+                    <span className={styles.barLabel}>MIT UNS</span>
                   </div>
                 </div>
               </div>
@@ -121,12 +132,12 @@ export default function ROIBenefits() {
               {/* Stats */}
               <div className={styles.stats}>
                 <div className={styles.statItem}>
-                  <span className={styles.statLabel}>Human Setter durchschnitt:</span>
-                  <span className={`${styles.statValue} ${styles.statValueRed}`}>10-20%</span>
+                  <span className={styles.statLabel}>Buchungsportale & Co.:</span>
+                  <span className={`${styles.statValue} ${styles.statValueRed}`}>Abhängigkeit</span>
                 </div>
                 <div className={styles.statItem}>
-                  <span className={styles.statLabel}>AI Setter durchschnitt:</span>
-                  <span className={`${styles.statValue} ${styles.statValueGreen}`}>30-40%</span>
+                  <span className={styles.statLabel}>Performance-Marketing:</span>
+                  <span className={`${styles.statValue} ${styles.statValueGreen}`}>Mehr Direktbuchungen</span>
                 </div>
               </div>
             </Card>
@@ -137,7 +148,7 @@ export default function ROIBenefits() {
             <Card variant="glass" padding="lg" className={styles.card}>
               <div className={styles.cardHeader}>
                 <span className={styles.cardNumber}>02.</span>
-                <h3 className={styles.cardTitle}>Reduce expenses</h3>
+                <h3 className={styles.cardTitle}>Marketingkosten optimieren</h3>
               </div>
 
               {/* Line Chart */}
@@ -149,7 +160,7 @@ export default function ROIBenefits() {
                     <line x1="0" y1="100" x2="400" y2="100" className={styles.gridLine} />
                     <line x1="0" y1="150" x2="400" y2="150" className={styles.gridLine} />
                     
-                    {/* Human Setter Line */}
+                    {/* Without Strategy Line */}
                     <motion.path
                       d="M 0 60 Q 100 40, 200 80 T 400 50"
                       className={styles.lineHuman}
@@ -167,7 +178,7 @@ export default function ROIBenefits() {
                       transition={{ delay: 1, duration: 0.3 }}
                     />
                     
-                    {/* AI Setter Line */}
+                    {/* With Strategy Line */}
                     <motion.path
                       d="M 0 140 Q 100 160, 200 130 T 400 150"
                       className={styles.lineAi}
@@ -186,8 +197,8 @@ export default function ROIBenefits() {
                     />
                     
                     {/* Labels */}
-                    <text x="210" y="70" className={styles.chartLabel}>HUMAN SETTER COSTS</text>
-                    <text x="210" y="120" className={styles.chartLabelAi}>AI SETTER COSTS</text>
+                    <text x="210" y="70" className={styles.chartLabel}>OHNE STRATEGIE</text>
+                    <text x="210" y="120" className={styles.chartLabelAi}>MIT FRANCO CONSULTING</text>
                   </svg>
                 </div>
               </div>
@@ -195,12 +206,12 @@ export default function ROIBenefits() {
               {/* Stats */}
               <div className={styles.stats}>
                 <div className={styles.statItem}>
-                  <span className={styles.statLabel}>1 human setter:</span>
-                  <span className={`${styles.statValue} ${styles.statValueRed}`}>$2000<span className={styles.statPeriod}>/month</span></span>
+                  <span className={styles.statLabel}>Hohe Streuverluste:</span>
+                  <span className={`${styles.statValue} ${styles.statValueRed}`}>Ineffizient</span>
                 </div>
                 <div className={styles.statItem}>
-                  <span className={styles.statLabel}>Unlimited AI setters:</span>
-                  <span className={`${styles.statValue} ${styles.statValueGreen}`}>$297<span className={styles.statPeriod}>/month</span></span>
+                  <span className={styles.statLabel}>Gezielte Steuerung:</span>
+                  <span className={`${styles.statValue} ${styles.statValueGreen}`}>Optimiert</span>
                 </div>
               </div>
             </Card>
@@ -211,7 +222,7 @@ export default function ROIBenefits() {
             <Card variant="glass" padding="lg" className={styles.card}>
               <div className={styles.cardHeader}>
                 <span className={styles.cardNumber}>03.</span>
-                <h3 className={styles.cardTitle}>Maximize capacity</h3>
+                <h3 className={styles.cardTitle}>Markterschließung maximieren</h3>
               </div>
 
               {/* Globe Graphic */}
@@ -264,12 +275,12 @@ export default function ROIBenefits() {
               {/* Stats */}
               <div className={styles.stats}>
                 <div className={styles.statItem}>
-                  <span className={styles.statLabel}>Human capacity:</span>
-                  <span className={`${styles.statValue} ${styles.statValueRed}`}>150<span className={styles.statPeriod}>/leads per day</span></span>
+                  <span className={styles.statLabel}>Begrenzte Märkte:</span>
+                  <span className={`${styles.statValue} ${styles.statValueRed}`}>Wenig Kontrolle</span>
                 </div>
                 <div className={styles.statItem}>
-                  <span className={styles.statLabel}>AI setter capacity:</span>
-                  <span className={`${styles.statValue} ${styles.statValueGreen}`}>10,000+<span className={styles.statPeriod}>/leads per day</span></span>
+                  <span className={styles.statLabel}>Gezielte Zielmärkte:</span>
+                  <span className={`${styles.statValue} ${styles.statValueGreen}`}>Vollständige Steuerung</span>
                 </div>
               </div>
             </Card>

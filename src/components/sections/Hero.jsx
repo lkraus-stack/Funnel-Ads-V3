@@ -16,10 +16,12 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Button from '../ui/Button';
 import AnimatedCounter from '../ui/AnimatedCounter';
+import { useContactModal } from '../../contexts/ContactModalContext';
 import { heroContent } from '../../data/content';
 import styles from './Hero.module.css';
 
 export default function Hero() {
+  const { openModal } = useContactModal();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -71,7 +73,7 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <motion.div className={styles.ctas} variants={itemVariants}>
-          <Button size="lg" href="#contact" iconRight={ArrowRight}>
+          <Button size="lg" onClick={openModal} iconRight={ArrowRight}>
             {heroContent.primaryCta}
           </Button>
           <Button variant="outline" size="lg" href="#features">

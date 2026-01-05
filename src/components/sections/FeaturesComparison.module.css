@@ -3,13 +3,37 @@
  */
 
 .section {
-  padding: var(--space-4xl) 0;
+  padding: var(--space-xl) 0;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--space-4xl) 0;
+  }
 }
 
 .container {
   max-width: var(--container-xl);
   margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-sm);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--space-lg);
+  }
 }
 
 /* ========================================
@@ -17,7 +41,13 @@
    ======================================== */
 .header {
   text-align: center;
-  margin-bottom: var(--space-3xl);
+  margin-bottom: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .header {
+    margin-bottom: var(--space-3xl);
+  }
 }
 
 .title {
@@ -36,7 +66,19 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-xl);
+  gap: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    gap: var(--space-lg);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    gap: var(--space-xl);
+  }
 }
 
 .card {

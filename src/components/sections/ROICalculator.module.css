@@ -4,10 +4,22 @@
  */
 
 .section {
-  padding: var(--space-4xl) 0;
+  padding: var(--space-xl) 0;
   background: var(--bg-darker);
   position: relative;
   overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--space-4xl) 0;
+  }
 }
 
 .section::before {
@@ -16,17 +28,43 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 800px;
-  height: 800px;
+  width: 400px;
+  height: 400px;
   background: radial-gradient(circle, rgba(var(--primary-rgb), 0.08) 0%, transparent 70%);
   pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .section::before {
+    width: 600px;
+    height: 600px;
+  }
+}
+
+@media (min-width: 768px) {
+  .section::before {
+    width: 800px;
+    height: 800px;
+  }
 }
 
 .container {
   max-width: var(--container-lg);
   margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-sm);
   position: relative;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--space-lg);
+  }
 }
 
 /* ========================================
@@ -34,7 +72,13 @@
    ======================================== */
 .header {
   text-align: center;
-  margin-bottom: var(--space-3xl);
+  margin-bottom: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .header {
+    margin-bottom: var(--space-3xl);
+  }
 }
 
 .badge {
@@ -73,7 +117,13 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xl);
+  gap: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .content {
+    gap: var(--space-2xl);
+  }
 }
 
 /* ========================================
@@ -87,8 +137,15 @@
 
 .inputs {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--space-2xl);
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .inputs {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-2xl);
+  }
 }
 
 .inputGroup {
@@ -192,18 +249,46 @@
 .stackedBarsWrapper {
   border: 2px solid rgba(var(--primary-rgb), 0.15);
   border-radius: var(--radius-xl);
-  padding: var(--space-2xl);
+  padding: var(--space-lg);
   background: linear-gradient(135deg, rgba(15, 23, 20, 0.95) 0%, rgba(10, 15, 13, 0.95) 100%);
   border: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+@media (min-width: 768px) {
+  .stackedBarsWrapper {
+    padding: var(--space-2xl);
+  }
+}
+
+/* Heller Modus: Hintergrund anpassen */
+[data-theme="light"] .stackedBarsWrapper {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.95) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .stackedBars {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: var(--space-2xl);
-  margin-bottom: var(--space-2xl);
-  padding: var(--space-lg) 0;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md) 0;
+}
+
+@media (min-width: 640px) {
+  .stackedBars {
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .stackedBars {
+    gap: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-lg) 0;
+  }
 }
 
 .stackedBarGroup {
@@ -341,14 +426,36 @@
   line-height: 1.3;
 }
 
+/* Heller Modus: Text-Schatten entfernen oder anpassen */
+[data-theme="light"] .stackedBarLabel {
+  text-shadow: none;
+  color: #1f2937;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Heller Modus: Text in den farbigen Balken besser lesbar machen */
+[data-theme="light"] .stackedBarRevenue .stackedBarLabel,
+[data-theme="light"] .stackedBarCost .stackedBarLabel {
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
 /* ========================================
    RESULTS GRID
    ======================================== */
 .resultsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-xl);
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+@media (min-width: 640px) {
+  .resultsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
 }
 
 .resultBox {
@@ -397,8 +504,15 @@
    ======================================== */
 .infoGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-xl);
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 640px) {
+  .infoGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
 }
 
 .infoCard {
@@ -479,10 +593,6 @@
    RESPONSIVE
    ======================================== */
 @media (max-width: 1024px) {
-  .inputs {
-    grid-template-columns: 1fr;
-  }
-
   .stackedBarsWrapper {
     border: none;
     padding: 0;
@@ -503,15 +613,7 @@
   }
 }
 
-@media (max-width: 768px) {
-  .infoGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .resultsGrid {
-    grid-template-columns: 1fr;
-  }
-
+@media (max-width: 767px) {
   .stackedBars {
     flex-direction: column;
     align-items: center;

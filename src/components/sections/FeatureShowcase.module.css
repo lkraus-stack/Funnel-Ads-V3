@@ -1,53 +1,118 @@
 /**
  * FeatureShowcase Section Styles
+ * 
+ * Layout: 3 Features nebeneinander als Prozess-Schritte
  */
 
 .section {
-  padding: var(--space-4xl) 0;
+  padding: var(--space-xl) 0;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--space-4xl) 0;
+  }
 }
 
 .container {
   max-width: var(--container-xl);
   margin: 0 auto;
-  padding: 0 var(--space-lg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4xl);
+  padding: 0 var(--space-sm);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--space-lg);
+  }
 }
 
 /* ========================================
-   FEATURE ROW
+   FEATURES GRID
+   ======================================== */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .featuresGrid {
+    gap: var(--space-2xl);
+  }
+}
+
+@media (min-width: 1024px) {
+  .featuresGrid {
+    gap: var(--space-3xl);
+  }
+}
+
+/* ========================================
+   FEATURE CARD
    ======================================== */
 .feature {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-3xl);
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-default);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.feature.reversed {
-  direction: rtl;
+@media (min-width: 768px) {
+  .feature {
+    padding: var(--space-2xl);
+  }
 }
 
-.feature.reversed > * {
-  direction: ltr;
+.feature:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.featureNumber {
+  position: absolute;
+  top: var(--space-xl);
+  right: var(--space-xl);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary);
+  opacity: 0.1;
+  line-height: 1;
 }
 
 /* ========================================
-   CONTENT SIDE
+   CONTENT
    ======================================== */
 .content {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
+  flex: 1;
 }
 
 .title {
-  font-size: clamp(var(--text-2xl), 4vw, var(--text-4xl));
+  font-size: clamp(var(--text-xl), 2vw, var(--text-2xl));
+  margin-top: var(--space-md);
 }
 
 .subtitle {
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   color: var(--primary-light);
   font-weight: var(--font-weight-medium);
 }
@@ -55,6 +120,7 @@
 .description {
   color: var(--text-secondary);
   line-height: var(--leading-relaxed);
+  font-size: var(--text-sm);
 }
 
 /* ========================================
@@ -65,6 +131,7 @@
   flex-direction: column;
   gap: var(--space-md);
   margin: var(--space-md) 0;
+  flex: 1;
 }
 
 .point {
@@ -77,8 +144,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   background: rgba(var(--primary-rgb), 0.1);
   border-radius: var(--radius-lg);
   color: var(--primary);
@@ -87,204 +154,37 @@
 
 .pointText {
   color: var(--text-secondary);
-  font-size: var(--text-base);
-}
-
-/* ========================================
-   IMAGE SIDE
-   ======================================== */
-.imageWrapper {
-  position: relative;
-}
-
-.imageCard {
-  overflow: hidden;
-}
-
-/* ========================================
-   MOCKUP
-   ======================================== */
-.mockup {
-  background: var(--bg-darker);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-.mockupHeader {
-  background: var(--bg-card);
-  padding: var(--space-sm) var(--space-md);
-  border-bottom: 1px solid var(--border-default);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.mockupDots {
-  display: flex;
-  gap: var(--space-xs);
-}
-
-.mockupDots span {
-  width: 12px;
-  height: 12px;
-  border-radius: var(--radius-full);
-  background: var(--bg-elevated);
-}
-
-.mockupDots span:nth-child(1) {
-  background: #ff5f57;
-}
-
-.mockupDots span:nth-child(2) {
-  background: #ffbd2e;
-}
-
-.mockupDots span:nth-child(3) {
-  background: #28ca42;
-}
-
-.mockupTitle {
   font-size: var(--text-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--text-secondary);
-}
-
-.mockupStatus {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  font-size: var(--text-xs);
-  color: var(--secondary);
-}
-
-.statusDot {
-  width: 8px;
-  height: 8px;
-  background: var(--secondary);
-  border-radius: var(--radius-full);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.mockupContent {
-  padding: var(--space-md);
-  min-height: 320px;
-  max-height: 320px;
-  overflow-y: auto;
-}
-
-.mockupMessage {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.messageBot,
-.messageUser {
-  display: flex;
-  gap: var(--space-sm);
-  align-items: flex-start;
-}
-
-.messageUser {
-  justify-content: flex-end;
-}
-
-.messageAvatar {
-  width: 32px;
-  height: 32px;
-  background: var(--gradient-primary);
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--text-xs);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-  flex-shrink: 0;
-}
-
-.messageBubble {
-  background: var(--bg-card);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-lg);
-  border-top-left-radius: var(--radius-sm);
-  color: var(--text-secondary);
-  font-size: var(--text-sm);
-  max-width: 80%;
-}
-
-.messageBubbleUser {
-  background: var(--primary);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-lg);
-  border-top-right-radius: var(--radius-sm);
-  color: var(--text-primary);
-  font-size: var(--text-sm);
-  max-width: 80%;
-}
-
-/* ========================================
-   INPUT FIELD
-   ======================================== */
-.mockupInput {
-  display: flex;
-  gap: var(--space-sm);
-  padding: var(--space-sm) var(--space-md);
-  border-top: 1px solid var(--border-default);
-  background: var(--bg-card);
-}
-
-.inputField {
-  flex: 1;
-  padding: var(--space-sm) var(--space-md);
-  background: var(--bg-darker);
-  border-radius: var(--radius-lg);
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-}
-
-.sendButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  background: var(--gradient-primary);
-  border-radius: var(--radius-lg);
-  color: var(--text-primary);
 }
 
 /* ========================================
    RESPONSIVE
    ======================================== */
 @media (max-width: 1024px) {
-  .feature {
+  .featuresGrid {
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
   }
 
-  .feature.reversed {
-    direction: ltr;
-  }
-
-  .imageWrapper {
-    order: -1;
+  .feature {
+    max-width: 600px;
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 768px) {
-  .mockupContent {
-    min-height: 280px;
-    max-height: 280px;
+  .section {
+    padding: var(--space-3xl) 0;
   }
 
-  .mockupTitle {
-    display: none;
+  .feature {
+    padding: var(--space-xl);
+  }
+
+  .featureNumber {
+    top: var(--space-lg);
+    right: var(--space-lg);
+    font-size: var(--text-3xl);
   }
 }
 

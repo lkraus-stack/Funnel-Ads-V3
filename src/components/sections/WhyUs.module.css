@@ -3,13 +3,37 @@
  */
 
 .section {
-  padding: var(--space-4xl) 0;
+  padding: var(--space-xl) 0;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--space-4xl) 0;
+  }
 }
 
 .container {
   max-width: var(--container-xl);
   margin: 0 auto;
-  padding: 0 var(--space-lg);
+  padding: 0 var(--space-sm);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--space-lg);
+  }
 }
 
 /* ========================================
@@ -20,8 +44,15 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-3xl);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .header {
+    gap: var(--space-lg);
+    margin-bottom: var(--space-3xl);
+  }
 }
 
 .title {
@@ -34,17 +65,36 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-xl);
+  gap: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    gap: var(--space-lg);
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    gap: var(--space-xl);
+  }
 }
 
 .feature {
   display: flex;
-  gap: var(--space-lg);
-  padding: var(--space-xl);
+  gap: var(--space-md);
+  padding: var(--space-lg);
   background: var(--bg-card);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-xl);
   transition: all var(--transition-base);
+}
+
+@media (min-width: 768px) {
+  .feature {
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+  }
 }
 
 .feature:hover {
@@ -57,13 +107,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   background: rgba(var(--primary-rgb), 0.1);
   border-radius: var(--radius-lg);
   color: var(--primary);
   flex-shrink: 0;
   transition: all var(--transition-base);
+}
+
+@media (min-width: 768px) {
+  .iconWrapper {
+    width: 56px;
+    height: 56px;
+  }
 }
 
 .feature:hover .iconWrapper {
