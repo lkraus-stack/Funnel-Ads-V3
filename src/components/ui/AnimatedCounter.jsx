@@ -56,10 +56,16 @@ export default function AnimatedCounter({
   
   useEffect(() => {
     const unsubscribe = display.on('change', (latest) => {
-      setDisplayValue(latest);
+      // Format mit Tausender-Trennzeichen (Punkt für de-DE)
+      const num = parseFloat(latest);
+      const formatted = new Intl.NumberFormat('de-DE', {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      }).format(num);
+      setDisplayValue(formatted);
     });
     return unsubscribe;
-  }, [display]);
+  }, [display, decimals]);
 
   return (
     <motion.span

@@ -92,13 +92,6 @@ export default function ROICalculator() {
     }).format(num);
   };
 
-  // Berechne Balken-Höhen für gestapelte Darstellung
-  const maxRevenue = Math.max(
-    calculations.thirdParty.revenue,
-    calculations.ownAdsSamePrice.revenue,
-    calculations.ownAdsWithIncrease.revenue
-  );
-
   return (
     <section className={styles.section} id="pricing">
       <div className={styles.container}>
@@ -226,142 +219,113 @@ export default function ROICalculator() {
             <Card variant="glass" padding="lg" className={styles.comparisonCard}>
               <h3 className={styles.comparisonTitle}>Jährlicher Vergleich</h3>
               
-              <div className={styles.stackedBarsWrapper}>
-                <div className={styles.stackedBars}>
+              {/* Kompakte Vergleichs-Karten */}
+              <div className={styles.comparisonGrid}>
                 {/* Drittanbieter */}
-                <div className={styles.stackedBarGroup}>
-                  <div className={styles.stackedBarHeader}>
-                    <div className={styles.stackedBarLabel}>
-                      <AlertTriangle size={18} className={styles.iconWarning} />
-                      <div>
-                        <div className={styles.stackedBarTitle}>Drittanbieter</div>
-                        <div className={styles.stackedBarSubtitle}>Booking, Check24, etc.</div>
-                      </div>
-                    </div>
-                    <div className={styles.stackedBarNet}>
-                      <AnimatedCounter value={calculations.thirdParty.net} prefix="€" duration={1} />
+                <div className={styles.comparisonItem}>
+                  <div className={styles.comparisonItemHeader}>
+                    <AlertTriangle size={20} className={styles.iconWarning} />
+                    <div className={styles.comparisonItemTitle}>
+                      <div className={styles.comparisonItemTitleMain}>Drittanbieter</div>
+                      <div className={styles.comparisonItemTitleSub}>Booking, Check24, etc.</div>
                     </div>
                   </div>
-                  <div className={styles.stackedBarContainer}>
-                    <motion.div 
-                      className={`${styles.stackedBarRevenue} ${styles.stackedBarRevenueThird}`}
-                      initial={{ height: 0 }}
-                      whileInView={{ height: `${(calculations.thirdParty.revenue / maxRevenue) * 100}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, ease: "easeOut" }}
-                    >
-                      <span className={styles.stackedBarLabel}>
-                        Umsatz: {formatCurrency(calculations.thirdParty.revenue)}
+                  <div className={styles.comparisonItemContent}>
+                    <div className={styles.comparisonRow}>
+                      <span className={styles.comparisonLabel}>Umsatz</span>
+                      <span className={styles.comparisonValue}>{formatCurrency(calculations.thirdParty.revenue)}</span>
+                    </div>
+                    <div className={styles.comparisonRow}>
+                      <span className={styles.comparisonLabel}>Provision (20%)</span>
+                      <span className={`${styles.comparisonValue} ${styles.comparisonValueNegative}`}>
+                        -{formatCurrency(calculations.thirdParty.commission)}
                       </span>
-                    </motion.div>
-                    <motion.div 
-                      className={`${styles.stackedBarCost} ${styles.stackedBarCostThird}`}
-                      initial={{ height: 0 }}
-                      whileInView={{ height: `${(calculations.thirdParty.commission / maxRevenue) * 100}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-                    >
-                      <span className={styles.stackedBarLabel}>
-                        Provision (20%): -{formatCurrency(calculations.thirdParty.commission)}
+                    </div>
+                    <div className={styles.comparisonDivider}></div>
+                    <div className={styles.comparisonRow}>
+                      <span className={styles.comparisonLabel}>Nettoertrag</span>
+                      <span className={`${styles.comparisonValue} ${styles.comparisonValueNet}`}>
+                        <AnimatedCounter value={calculations.thirdParty.net} prefix="€" duration={1} />
                       </span>
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
 
                 {/* Eigene Ads - Gleicher Preis */}
-                <div className={styles.stackedBarGroup}>
-                  <div className={styles.stackedBarHeader}>
-                    <div className={styles.stackedBarLabel}>
-                      <CheckCircle2 size={18} className={styles.iconSuccess} />
-                      <div>
-                        <div className={styles.stackedBarTitle}>Eigene Ads</div>
-                        <div className={styles.stackedBarSubtitle}>Gleicher Zimmerpreis</div>
-                      </div>
-                    </div>
-                    <div className={styles.stackedBarNet}>
-                      <AnimatedCounter value={calculations.ownAdsSamePrice.net} prefix="€" duration={1} />
+                <div className={`${styles.comparisonItem} ${styles.comparisonItemSuccess}`}>
+                  <div className={styles.comparisonItemHeader}>
+                    <CheckCircle2 size={20} className={styles.iconSuccess} />
+                    <div className={styles.comparisonItemTitle}>
+                      <div className={styles.comparisonItemTitleMain}>Eigene Ads</div>
+                      <div className={styles.comparisonItemTitleSub}>Gleicher Zimmerpreis</div>
                     </div>
                   </div>
-                  <div className={styles.stackedBarContainer}>
-                    <motion.div 
-                      className={`${styles.stackedBarRevenue} ${styles.stackedBarRevenueOwn}`}
-                      initial={{ height: 0 }}
-                      whileInView={{ height: `${(calculations.ownAdsSamePrice.revenue / maxRevenue) * 100}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-                    >
-                      <span className={styles.stackedBarLabel}>
-                        Umsatz: {formatCurrency(calculations.ownAdsSamePrice.revenue)}
+                  <div className={styles.comparisonItemContent}>
+                    <div className={styles.comparisonRow}>
+                      <span className={styles.comparisonLabel}>Umsatz</span>
+                      <span className={styles.comparisonValue}>{formatCurrency(calculations.ownAdsSamePrice.revenue)}</span>
+                    </div>
+                    <div className={styles.comparisonRow}>
+                      <span className={styles.comparisonLabel}>Marketing (10%)</span>
+                      <span className={`${styles.comparisonValue} ${styles.comparisonValueNegative}`}>
+                        -{formatCurrency(calculations.ownAdsSamePrice.marketingCost)}
                       </span>
-                    </motion.div>
-                    <motion.div 
-                      className={`${styles.stackedBarCost} ${styles.stackedBarCostOwn}`}
-                      initial={{ height: 0 }}
-                      whileInView={{ height: `${(calculations.ownAdsSamePrice.marketingCost / maxRevenue) * 100}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-                    >
-                      <span className={styles.stackedBarLabel}>
-                        Marketing (10%): -{formatCurrency(calculations.ownAdsSamePrice.marketingCost)}
+                    </div>
+                    <div className={styles.comparisonDivider}></div>
+                    <div className={styles.comparisonRow}>
+                      <span className={styles.comparisonLabel}>Nettoertrag</span>
+                      <span className={`${styles.comparisonValue} ${styles.comparisonValueNet}`}>
+                        <AnimatedCounter value={calculations.ownAdsSamePrice.net} prefix="€" duration={1} />
                       </span>
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
 
                 {/* Eigene Ads - Mit Preiserhöhung */}
-                <div className={styles.stackedBarGroup}>
-                  <div className={styles.stackedBarHeader}>
-                    <div className={styles.stackedBarLabel}>
-                      <TrendingUp size={18} className={styles.iconSuccess} />
-                      <div>
-                        <div className={styles.stackedBarTitle}>Eigene Ads</div>
-                        <div className={styles.stackedBarSubtitle}>+{values.priceIncrease}% Preiserhöhung</div>
-                      </div>
-                    </div>
-                    <div className={styles.stackedBarNet}>
-                      <AnimatedCounter value={calculations.ownAdsWithIncrease.net} prefix="€" duration={1} />
+                <div className={`${styles.comparisonItem} ${styles.comparisonItemHighlight}`}>
+                  <div className={styles.comparisonItemHeader}>
+                    <TrendingUp size={20} className={styles.iconSuccess} />
+                    <div className={styles.comparisonItemTitle}>
+                      <div className={styles.comparisonItemTitleMain}>Eigene Ads</div>
+                      <div className={styles.comparisonItemTitleSub}>+{values.priceIncrease}% Preiserhöhung</div>
                     </div>
                   </div>
-                  <div className={styles.stackedBarContainer}>
-                    <motion.div 
-                      className={`${styles.stackedBarRevenue} ${styles.stackedBarRevenueOwnPlus}`}
-                      initial={{ height: 0 }}
-                      whileInView={{ height: `${(calculations.ownAdsWithIncrease.revenue / maxRevenue) * 100}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
-                    >
-                      <span className={styles.stackedBarLabel}>
-                        Umsatz: {formatCurrency(calculations.ownAdsWithIncrease.revenue)}
+                  <div className={styles.comparisonItemContent}>
+                    <div className={styles.comparisonRow}>
+                      <span className={styles.comparisonLabel}>Umsatz</span>
+                      <span className={styles.comparisonValue}>{formatCurrency(calculations.ownAdsWithIncrease.revenue)}</span>
+                    </div>
+                    <div className={styles.comparisonRow}>
+                      <span className={styles.comparisonLabel}>Marketing (10%)</span>
+                      <span className={`${styles.comparisonValue} ${styles.comparisonValueNegative}`}>
+                        -{formatCurrency(calculations.ownAdsWithIncrease.marketingCost)}
                       </span>
-                    </motion.div>
-                    <motion.div 
-                      className={`${styles.stackedBarCost} ${styles.stackedBarCostOwn}`}
-                      initial={{ height: 0 }}
-                      whileInView={{ height: `${(calculations.ownAdsWithIncrease.marketingCost / maxRevenue) * 100}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
-                    >
-                      <span className={styles.stackedBarLabel}>
-                        Marketing (10%): -{formatCurrency(calculations.ownAdsWithIncrease.marketingCost)}
+                    </div>
+                    <div className={styles.comparisonDivider}></div>
+                    <div className={styles.comparisonRow}>
+                      <span className={styles.comparisonLabel}>Nettoertrag</span>
+                      <span className={`${styles.comparisonValue} ${styles.comparisonValueNet}`}>
+                        <AnimatedCounter value={calculations.ownAdsWithIncrease.net} prefix="€" duration={1} />
                       </span>
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
               </div>
-              </div>
 
               {/* Ergebnisse */}
-              <div className={styles.resultsGrid}>
+              <div className={styles.resultsSection}>
+                <h4 className={styles.resultsTitle}>Dein Vorteil</h4>
+                <div className={styles.resultsGrid}>
                 <motion.div 
                   className={styles.resultBox}
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.9 }}
+                  transition={{ delay: 0.3 }}
                 >
                   <div className={styles.resultBoxHeader}>
                     <Target size={20} />
-                    <span>Vorteil bei gleichem Preis</span>
+                    <span>Mehr Umsatz mit eigenen Ads</span>
                   </div>
                   <div className={styles.resultBoxValue}>
                     +<AnimatedCounter value={calculations.advantageSamePrice} prefix="€" duration={1.5} />
@@ -376,10 +340,10 @@ export default function ROICalculator() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 1.0 }}
+                  transition={{ delay: 0.4 }}
                 >
                   <div className={styles.resultBoxHeader}>
-                    <TrendingUp size={20} />
+                    <TrendingUp size={18} />
                     <span>Vorteil mit Preiserhöhung</span>
                   </div>
                   <div className={styles.resultBoxValue}>
@@ -389,6 +353,7 @@ export default function ROICalculator() {
                     +{calculations.percentageGainWithIncrease.toFixed(1)}% mehr Nettoertrag
                   </div>
                 </motion.div>
+                </div>
               </div>
             </Card>
           </motion.div>

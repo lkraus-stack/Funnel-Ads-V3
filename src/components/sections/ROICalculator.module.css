@@ -239,205 +239,163 @@
 .comparisonTitle {
   font-size: var(--text-xl);
   text-align: center;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-xl);
   color: var(--text-primary);
 }
 
 /* ========================================
-   STACKED BARS (Gestapelte Balken)
+   COMPARISON GRID (Kompakte Karten)
    ======================================== */
-.stackedBarsWrapper {
-  border: 2px solid rgba(var(--primary-rgb), 0.15);
-  border-radius: var(--radius-xl);
-  padding: var(--space-lg);
-  background: linear-gradient(135deg, rgba(15, 23, 20, 0.95) 0%, rgba(10, 15, 13, 0.95) 100%);
-  border: 1px solid rgba(16, 185, 129, 0.1);
+.comparisonGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
 }
 
 @media (min-width: 768px) {
-  .stackedBarsWrapper {
-    padding: var(--space-2xl);
-  }
-}
-
-/* Heller Modus: Hintergrund anpassen */
-[data-theme="light"] .stackedBarsWrapper {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.95) 100%);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-}
-
-.stackedBars {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: var(--space-md);
-  margin-bottom: var(--space-lg);
-  padding: var(--space-md) 0;
-}
-
-@media (min-width: 640px) {
-  .stackedBars {
+  .comparisonGrid {
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
-    padding: var(--space-lg) 0;
   }
 }
 
-@media (min-width: 768px) {
-  .stackedBars {
-    gap: var(--space-2xl);
-    margin-bottom: var(--space-2xl);
-    padding: var(--space-lg) 0;
-  }
+.comparisonItem {
+  padding: var(--space-lg);
+  background: rgba(var(--bg-card-rgb), 0.5);
+  border: 1px solid rgba(var(--primary-rgb), 0.1);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
 }
 
-.stackedBarGroup {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  width: 180px;
-  flex-shrink: 0;
+.comparisonItem:hover {
+  border-color: rgba(var(--primary-rgb), 0.2);
+  transform: translateY(-2px);
 }
 
-.stackedBarHeader {
+.comparisonItemSuccess {
+  border-color: rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.comparisonItemSuccess:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.comparisonItemHighlight {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+}
+
+.comparisonItemHighlight:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.15);
+}
+
+.comparisonItemHeader {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   gap: var(--space-sm);
-  align-items: center;
-  text-align: center;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid rgba(var(--primary-rgb), 0.1);
 }
 
-.stackedBarLabel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-xs);
+.comparisonItemTitle {
+  flex: 1;
 }
 
-.stackedBarLabel > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.stackedBarTitle {
+.comparisonItemTitleMain {
   font-size: var(--text-base);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
-  text-align: center;
+  margin-bottom: 2px;
 }
 
-.stackedBarSubtitle {
+.comparisonItemTitleSub {
   font-size: var(--text-xs);
   color: var(--text-muted);
-  text-align: center;
-}
-
-.stackedBarNet {
-  font-family: var(--font-heading);
-  font-size: var(--text-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-  text-align: center;
-  padding: var(--space-sm);
-  background: rgba(var(--bg-card-rgb), 0.5);
-  border-radius: var(--radius-md);
 }
 
 .iconWarning {
   color: #ff6b35;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .iconSuccess {
   color: #10b981;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
-/* Container für gestapelte Balken */
-.stackedBarContainer {
-  position: relative;
-  height: 350px;
+.comparisonItemContent {
   display: flex;
-  flex-direction: column-reverse;
-  gap: 4px;
-  padding: var(--space-md);
-  background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+  flex-direction: column;
+  gap: var(--space-sm);
 }
 
-/* Umsatz Balken */
-.stackedBarRevenue {
-  width: 100%;
-  border-radius: var(--radius-md);
+.comparisonRow {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  position: relative;
-  min-height: 40px;
+  gap: var(--space-md);
 }
 
-.stackedBarRevenueThird {
-  background: linear-gradient(180deg, rgba(255, 107, 53, 0.4) 0%, rgba(255, 107, 53, 0.6) 100%);
-  border: 2px solid rgba(255, 107, 53, 0.6);
+.comparisonLabel {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
 }
 
-.stackedBarRevenueOwn {
-  background: linear-gradient(180deg, rgba(16, 185, 129, 0.4) 0%, rgba(16, 185, 129, 0.6) 100%);
-  border: 2px solid rgba(16, 185, 129, 0.6);
+.comparisonValue {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  text-align: right;
 }
 
-.stackedBarRevenueOwnPlus {
-  background: linear-gradient(180deg, rgba(16, 185, 129, 0.5) 0%, rgba(16, 185, 129, 0.8) 100%);
-  border: 2px solid rgba(16, 185, 129, 0.8);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+.comparisonValueNegative {
+  color: #ff6b35;
 }
 
-/* Kosten Balken (darüber) */
-.stackedBarCost {
-  width: 100%;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  min-height: 30px;
+.comparisonValueNet {
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-light);
 }
 
-.stackedBarCostThird {
-  background: linear-gradient(180deg, rgba(220, 38, 38, 0.5) 0%, rgba(220, 38, 38, 0.7) 100%);
-  border: 2px solid rgba(220, 38, 38, 0.7);
+.comparisonItemSuccess .comparisonValueNet {
+  color: #10b981;
 }
 
-.stackedBarCostOwn {
-  background: linear-gradient(180deg, rgba(251, 146, 60, 0.4) 0%, rgba(251, 146, 60, 0.6) 100%);
-  border: 2px solid rgba(251, 146, 60, 0.6);
+.comparisonItemHighlight .comparisonValueNet {
+  color: #10b981;
+  font-size: var(--text-xl);
 }
 
-.stackedBarLabel {
-  font-size: var(--text-xs);
+.comparisonDivider {
+  height: 1px;
+  background: rgba(var(--primary-rgb), 0.1);
+  margin: var(--space-xs) 0;
+}
+
+/* ========================================
+   RESULTS SECTION
+   ======================================== */
+.resultsSection {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid rgba(var(--primary-rgb), 0.1);
+}
+
+.resultsTitle {
+  font-size: var(--text-lg);
   font-weight: var(--font-weight-semibold);
   color: var(--text-primary);
   text-align: center;
-  padding: var(--space-xs);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  line-height: 1.3;
-}
-
-/* Heller Modus: Text-Schatten entfernen oder anpassen */
-[data-theme="light"] .stackedBarLabel {
-  text-shadow: none;
-  color: #1f2937;
-  font-weight: var(--font-weight-bold);
-}
-
-/* Heller Modus: Text in den farbigen Balken besser lesbar machen */
-[data-theme="light"] .stackedBarRevenue .stackedBarLabel,
-[data-theme="light"] .stackedBarCost .stackedBarLabel {
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  margin-bottom: var(--space-lg);
 }
 
 /* ========================================
@@ -447,14 +405,12 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-md);
-  margin-bottom: var(--space-lg);
 }
 
 @media (min-width: 640px) {
   .resultsGrid {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
   }
 }
 
@@ -479,8 +435,9 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-xs);
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
 }
 
 .resultBoxValue {
@@ -592,69 +549,24 @@
 /* ========================================
    RESPONSIVE
    ======================================== */
-@media (max-width: 1024px) {
-  .stackedBarsWrapper {
-    border: none;
-    padding: 0;
-    background: transparent;
-  }
-
-  .stackedBars {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .stackedBarGroup {
-    width: 200px;
-  }
-
-  .stackedBarContainer {
-    height: 280px;
-  }
-}
-
 @media (max-width: 767px) {
-  .stackedBars {
-    flex-direction: column;
-    align-items: center;
+  .comparisonGrid {
+    gap: var(--space-md);
   }
 
-  .stackedBarGroup {
-    width: 200px;
+  .comparisonItem {
+    padding: var(--space-md);
   }
 
-  .stackedBarContainer {
-    height: 240px;
-  }
-
-  .stackedBarLabel {
-    font-size: 10px;
-  }
-
-  .stackedBarNet {
-    font-size: var(--text-lg);
-  }
-}
-
-@media (max-width: 480px) {
-  .stackedBarGroup {
-    width: 160px;
-  }
-
-  .stackedBarNet {
-    font-size: var(--text-base);
-  }
-
-  .stackedBarContainer {
-    height: 200px;
-    padding: var(--space-sm);
-  }
-
-  .stackedBarTitle {
+  .comparisonValue {
     font-size: var(--text-sm);
   }
 
-  .stackedBarSubtitle {
-    font-size: 10px;
+  .comparisonValueNet {
+    font-size: var(--text-base);
+  }
+
+  .comparisonItemHighlight .comparisonValueNet {
+    font-size: var(--text-lg);
   }
 }

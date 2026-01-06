@@ -33,9 +33,9 @@ export const heroContent = {
   primaryCta: "Kostenlose Beratung",
   secondaryCta: "Mehr erfahren",
   stats: [
-    { value: "200+", label: "Hotels betreut" },
-    { value: "10M+", label: "Werbebudget verwaltet" },
-    { value: "0%", label: "Hidden Fees" },
+    { value: "+300", label: "Hotels betreut" },
+    { value: "+10M", label: "Mio." },
+    { value: "+8", label: "Jahre Erfahrung" },
   ],
 };
 

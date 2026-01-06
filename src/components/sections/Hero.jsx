@@ -83,16 +83,24 @@ export default function Hero() {
 
         {/* Stats */}
         <motion.div className={styles.stats} variants={itemVariants}>
-          {heroContent.stats.map((stat, index) => (
-            <div key={index} className={styles.stat}>
-              <AnimatedCounter
-                value={stat.value}
-                className={styles.statValue}
-                suffix={stat.value.includes('+') ? '+' : stat.value.includes('x') ? 'x' : stat.value.includes('M') ? 'M+' : ''}
-              />
-              <span className={styles.statLabel}>{stat.label}</span>
-            </div>
-          ))}
+          {heroContent.stats.map((stat, index) => {
+            const hasPlusPrefix = stat.value.startsWith('+');
+            const cleanValue = hasPlusPrefix ? stat.value.slice(1) : stat.value;
+            const hasM = cleanValue.includes('M');
+            const finalValue = hasM ? cleanValue.replace('M', '') : cleanValue;
+            
+            return (
+              <div key={index} className={styles.stat}>
+                <AnimatedCounter
+                  value={finalValue}
+                  className={styles.statValue}
+                  prefix={hasPlusPrefix ? '+' : ''}
+                  suffix={hasM ? 'M' : stat.value.includes('x') ? 'x' : ''}
+                />
+                <span className={styles.statLabel}>{stat.label}</span>
+              </div>
+            );
+          })}
         </motion.div>
       </motion.div>
     </section>
