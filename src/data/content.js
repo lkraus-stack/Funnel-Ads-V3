@@ -15,7 +15,7 @@ export const navContent = {
   links: [
     { label: "Leistungen", href: "#features" },
     { label: "Ergebnisse", href: "#results" },
-    { label: "Über uns", href: "#why-us" },
+    { label: "Über uns", href: "#about-us" },
     { label: "Kontakt", href: "#contact" },
   ],
   cta: "Kostenlose Beratung",
@@ -411,6 +411,28 @@ export const whyUsContent = {
 };
 
 // ========================================
+// ABOUT US SECTION
+// ========================================
+export const aboutUsContent = {
+  title: "Wer steckt hinter Franco Consulting?",
+  description: "Wir sind keine klassische Agentur, sondern strategische Partner. Unser Fokus liegt auf Substanz statt Buzzwords: fundierte Analysen, klare Entscheidungen und konsequente Umsetzung.",
+  image: "/images/founders.jpg", // TODO: Bild der Geschäftsführer hinzufügen
+  imageAlt: "Kilian Franco und Lukas Kraus - Geschäftsführer von Franco Consulting",
+  foundersTitle: "Unsere Geschäftsführer",
+  founders: [
+    {
+      name: "Kilian Franco",
+      role: "Inhaber & Performance Marketing Spezialist",
+    },
+    {
+      name: "Lukas Kraus",
+      role: "Inhaber & Performance Marketing Spezialist",
+    },
+  ],
+  cta: "Jetzt Anfragen",
+};
+
+// ========================================
 // FOOTER
 // ========================================
 export const footerContent = {
@@ -423,7 +445,7 @@ export const footerContent = {
         { label: "Home", href: "/" },
         { label: "Leistungen", href: "#features" },
         { label: "Ergebnisse", href: "#results" },
-        { label: "Über uns", href: "#why-us" },
+        { label: "Über uns", href: "#about-us" },
       ],
     },
     {

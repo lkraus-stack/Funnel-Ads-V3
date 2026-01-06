@@ -14,6 +14,7 @@ export { default as FeaturesComparison } from './FeaturesComparison';
 export { default as FeatureShowcase } from './FeatureShowcase';
 export { default as ROICalculator } from './ROICalculator';
 export { default as WhyUs } from './WhyUs';
+export { default as AboutUs } from './AboutUs';
 export { default as Testimonials } from './Testimonials';
 export { default as FAQ } from './FAQ';
 export { default as ContactForm } from './ContactForm';

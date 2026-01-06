@@ -21,6 +21,7 @@ import {
   FeatureShowcase,
   ROICalculator,
   WhyUs,
+  AboutUs,
   Testimonials,
   FAQ,
   ContactForm,
@@ -49,6 +50,9 @@ function App() {
 
         {/* 7. Why Us - "Why [Brand] Is the Go-To" Feature-Icons */}
         <WhyUs />
+
+        {/* 8. About Us - Über uns Sektion mit Geschäftsführern */}
+        <AboutUs />
 
         {/* 9. Testimonials - Carousel mit mehreren Testimonials */}
         <Testimonials />
