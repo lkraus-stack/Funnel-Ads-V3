@@ -51,11 +51,11 @@ function App() {
         {/* 7. Why Us - "Why [Brand] Is the Go-To" Feature-Icons */}
         <WhyUs />
 
-        {/* 8. About Us - Über uns Sektion mit Geschäftsführern */}
-        <AboutUs />
-
-        {/* 9. Testimonials - Carousel mit mehreren Testimonials */}
+        {/* 8. Testimonials - Carousel mit mehreren Testimonials */}
         <Testimonials />
+
+        {/* 9. About Us - Über uns Sektion mit Geschäftsführern */}
+        <AboutUs />
 
         {/* 10. FAQ - Akkordeon */}
         <FAQ />

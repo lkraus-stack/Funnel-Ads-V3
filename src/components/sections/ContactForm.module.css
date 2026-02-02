@@ -517,6 +517,20 @@
   text-decoration-color: var(--primary-light);
 }
 
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-lg);
+  color: #ef4444;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-lg);
+  text-align: left;
+}
+
 .submitButton {
   display: flex;
   justify-content: center;

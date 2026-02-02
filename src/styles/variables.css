@@ -211,9 +211,7 @@
   --bg-darker: #f5f5f7;        /* Leicht grauer für Kontrast */
   --bg-card: #ffffff;          /* Karten-Hintergrund - Weiß */
   --bg-card-hover: #f9fafb;    /* Karten-Hover-Zustand - Sehr helles Grau */
-  --bg-elevated: #f9fafb;      /* Erhöhte Elemente - Sehr helles Grau */
-
-  /* ========================================
+  --bg-elevated: #f9fafb;      /* Erhöhte Elemente - Sehr helles Grau */  /* ========================================
      TEXT-FARBEN (DUNKEL)
      ======================================== */
   --text-primary: #1f2937;     /* Haupttext - Dunkelgrau */
@@ -246,4 +244,3 @@
   --shadow-glow: 0 0 40px rgba(var(--primary-rgb), 0.2);
   --shadow-glow-strong: 0 0 60px rgba(var(--primary-rgb), 0.3);
 }
-

@@ -34,6 +34,8 @@ import styles from './ContactForm.module.css';
 export default function ContactForm() {
   const { isOpen, closeModal } = useContactModal();
   const [step, setStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
   const [formData, setFormData] = useState({
     hasMarketing: null,
     futureStart: null,
@@ -92,11 +94,34 @@ export default function ContactForm() {
     setStep(4);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Hier würdest du die Daten an dein Backend senden
-    console.log('Form submitted:', formData);
-    setStep(5); // Erfolgsseite
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Fehler beim Senden der Anfrage');
+      }
+
+      // Erfolgreich gesendet
+      setStep(5); // Erfolgsseite
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitError(error.message || 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Modal schließen mit ESC-Taste
@@ -516,9 +541,20 @@ export default function ContactForm() {
                       </span>
                     </label>
                   </div>
+                  {submitError && (
+                    <div className={styles.errorMessage}>
+                      <span style={{ color: 'var(--error, #ef4444)' }}>⚠️</span>
+                      <span>{submitError}</span>
+                    </div>
+                  )}
                   <div className={styles.submitButton}>
-                    <Button type="submit" size="lg" iconRight={ArrowRight}>
-                      Beratungsgespräch anfragen
+                    <Button 
+                      type="submit" 
+                      size="lg" 
+                      iconRight={ArrowRight}
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Wird gesendet...' : 'Beratungsgespräch anfragen'}
                     </Button>
                   </div>
                 </form>
