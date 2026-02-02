@@ -143,6 +143,56 @@ Anfrage erhalten am: ${timestamp}
   };
 }
 
+/**
+ * Bestätigungs-E-Mail an den Absender (E-Mail aus dem Formular)
+ */
+function formatConfirmationEmail(formData) {
+  const name = formData.name || 'Sie';
+  return {
+    html: `
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ihre Anfrage wurde empfangen</title>
+</head>
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <div style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); padding: 30px; border-radius: 10px 10px 0 0; text-align: center;">
+    <h1 style="color: white; margin: 0; font-size: 24px;">Anfrage empfangen</h1>
+  </div>
+  
+  <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e5e7eb;">
+    <p style="font-size: 18px; color: #1f2937; margin-top: 0;">Hallo ${escapeHtml(name)},</p>
+    <p style="color: #4b5563;">vielen Dank für Ihre Nachricht. Wir haben Ihre Anfrage erhalten und melden uns <strong>innerhalb von 24 Stunden</strong> bei Ihnen.</p>
+    <p style="color: #4b5563;">Bei Rückfragen erreichen Sie uns unter <a href="mailto:kontakt@franco-consulting.com" style="color: #6366f1; text-decoration: none;">kontakt@franco-consulting.com</a>.</p>
+    <p style="color: #4b5563; margin-bottom: 0;">Mit freundlichen Grüßen<br><strong>Ihr Team von Franco Consulting</strong></p>
+  </div>
+</body>
+</html>
+    `,
+    text: `
+Hallo ${name},
+
+vielen Dank für Ihre Nachricht. Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden bei Ihnen.
+
+Bei Rückfragen erreichen Sie uns unter kontakt@franco-consulting.com.
+
+Mit freundlichen Grüßen
+Ihr Team von Franco Consulting
+    `.trim(),
+  };
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 export default async function handler(req, res) {
   // Nur POST-Requests erlauben
   if (req.method !== 'POST') {
@@ -188,6 +238,7 @@ export default async function handler(req, res) {
     // Empfänger: Kontakt-E-Mail für Anfragen (oder RESEND_TO_EMAIL)
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'Franco Consulting <kontakt@franco-consulting.com>';
     const toEmail = process.env.RESEND_TO_EMAIL || 'kontakt@franco-consulting.com';
+    // 1. E-Mail an dich: neue Anfrage (kontakt@franco-consulting.com)
     const { data, error } = await resend.emails.send({
       from: fromEmail,
       to: toEmail,
@@ -203,6 +254,20 @@ export default async function handler(req, res) {
         error: 'Fehler beim Senden der E-Mail',
         details: error.message 
       });
+    }
+
+    // 2. Bestätigungs-E-Mail an den Absender (E-Mail aus dem Formular)
+    const confirmation = formatConfirmationEmail(formData);
+    const { error: confirmError } = await resend.emails.send({
+      from: fromEmail,
+      to: formData.email,
+      subject: 'Ihre Anfrage bei Franco Consulting wurde empfangen',
+      html: confirmation.html,
+      text: confirmation.text,
+    });
+    if (confirmError) {
+      console.error('Resend Confirmation Error:', confirmError);
+      // Anfrage-E-Mail ist angekommen, wir antworten trotzdem mit Erfolg
     }
 
     // Erfolgreiche Antwort
