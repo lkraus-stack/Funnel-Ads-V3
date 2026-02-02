@@ -108,7 +108,7 @@ export default function ROICalculator() {
           </span>
           <h2 className={styles.title}>Drittanbieter vs. Eigene Ads</h2>
           <p className={styles.subtitle}>
-            Berechne wie viel mehr du mit eigenen Google & Meta Ads verdienen kannst – 
+            Berechnen Sie, wie viel mehr Sie mit eigenen Google & Meta Ads verdienen können – 
             statt Provisionen an Booking, Check24 & Co. zu zahlen
           </p>
         </motion.div>
@@ -123,7 +123,7 @@ export default function ROICalculator() {
             transition={{ delay: 0.1 }}
           >
             <Card variant="glass" padding="lg">
-              <h3 className={styles.inputsTitle}>Deine Kennzahlen</h3>
+              <h3 className={styles.inputsTitle}>Ihre Kennzahlen</h3>
               <div className={styles.inputs}>
                 {/* Durchschnittlicher Buchungswert */}
                 <div className={styles.inputGroup}>
@@ -314,7 +314,7 @@ export default function ROICalculator() {
 
               {/* Ergebnisse */}
               <div className={styles.resultsSection}>
-                <h4 className={styles.resultsTitle}>Dein Vorteil</h4>
+                <h4 className={styles.resultsTitle}>Ihr Vorteil</h4>
                 <div className={styles.resultsGrid}>
                 <motion.div 
                   className={styles.resultBox}
@@ -432,7 +432,7 @@ export default function ROICalculator() {
               <ArrowRight size={20} />
             </Button>
             <p className={styles.ctaSubtext}>
-              Kostenlose Analyse für dein Hotel in 24h
+              Kostenlose Analyse für Ihr Hotel in 24h
             </p>
           </motion.div>
         </div>

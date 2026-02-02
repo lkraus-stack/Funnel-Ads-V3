@@ -27,14 +27,14 @@ export const navContent = {
 // ========================================
 export const heroContent = {
   badge: "200+ Hotels betreut",
-  title: "Die #1 Agentur für Hotel Mehr Buchungen mit Ads",
+  title: "Die #1 Hotel-Agentur für mehr Buchungen mit Ads",
   rotatingWords: ["Direktbuchungen", "Bessere Margen", "Mehr Kontrolle"],
   subtitle: "Wir steigern Ihre Direktbuchungsquote und reduzieren Abhängigkeiten von Buchungsportalen – durch strategische Performance-Kampagnen mit nachweisbaren Ergebnissen",
   primaryCta: "Kostenlose Beratung",
   secondaryCta: "Mehr erfahren",
   stats: [
-    { value: "+300", label: "Hotels betreut" },
-    { value: "+10M", label: "Mio." },
+    { value: "200+", label: "Hotels betreut" },
+    { value: "10M+", label: "€ Werbebudget" },
     { value: "+8", label: "Jahre Erfahrung" },
   ],
 };
@@ -180,8 +180,8 @@ export const featuresComparisonContent = {
 // ROI CALCULATOR SECTION
 // ========================================
 export const roiCalculatorContent = {
-  title: "Berechne deinen ROI",
-  subtitle: "Sehe wie viel du mit uns sparen und verdienen kannst",
+  title: "Berechnen Sie Ihren ROI",
+  subtitle: "Sehen Sie, wie viel Sie mit uns sparen und verdienen können",
   inputs: [
     { id: "leads", label: "Monatliche Leads", min: 100, max: 10000, default: 1000, step: 100 },
     { id: "budget", label: "Aktuelles Werbebudget (€)", min: 1000, max: 100000, default: 5000, step: 500 },
@@ -194,7 +194,7 @@ export const roiCalculatorContent = {
   },
   comparison: {
     before: { label: "Ohne Optimierung", conversionRate: "15%", cost: "Hoch" },
-    after: { label: "Mit FunnelAds", conversionRate: "40%", cost: "Optimiert" },
+    after: { label: "Mit Franco Consulting", conversionRate: "40%", cost: "Optimiert" },
   },
   cta: "Jetzt ROI sichern",
 };
@@ -264,7 +264,7 @@ export const benefitsGridContent = {
     {
       icon: "Target",
       title: "Gezielte Markterschließung",
-      description: "Wir erschließen profitabele Quell- und Zielmärkte je nach Region und Angebot.",
+      description: "Wir erschließen profitable Quell- und Zielmärkte je nach Region und Angebot.",
     },
     {
       icon: "BarChart",
