@@ -13,7 +13,7 @@
  */
 import { Layout } from './components/layout';
 import { ContactModalProvider } from './contexts/ContactModalContext';
-import { ThemeProvider } from './contexts/ThemeContext';
+import { CookieConsentProvider } from './contexts/CookieConsentContext';
 import {
   Hero,
   TrustedBy,
@@ -30,7 +30,7 @@ import {
 
 function App() {
   return (
-    <ThemeProvider>
+    <CookieConsentProvider>
       <ContactModalProvider>
         <Layout>
         {/* 1. Hero Section - Hauptüberschrift mit rotierendem Text */}
@@ -62,12 +62,12 @@ function App() {
 
         {/* 11. CTA - Finaler Call-to-Action */}
         <CTASection />
-      </Layout>
+        </Layout>
 
         {/* Contact Form Modal - Wird als Popup angezeigt */}
         <ContactForm />
       </ContactModalProvider>
-    </ThemeProvider>
+    </CookieConsentProvider>
   );
 }
 

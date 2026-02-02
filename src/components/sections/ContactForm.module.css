@@ -31,6 +31,7 @@
   width: 100%;
   max-width: 800px;
   max-height: 90vh;
+  max-height: calc(100svh - 2 * var(--space-md));
   margin: auto;
   z-index: calc(var(--z-modal) + 1);
 }
@@ -40,9 +41,11 @@
   border-radius: var(--radius-2xl);
   padding: var(--space-2xl) var(--space-xl);
   position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   max-height: 90vh;
+  max-height: calc(100svh - 2 * var(--space-md));
+  display: flex;
+  flex-direction: column;
   
   /* Verbesserter Schatten mit mehreren Layern für Tiefe und Glow */
   box-shadow: 
@@ -57,30 +60,42 @@
   
   position: relative;
   
+}
+
+.formContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 100%;
+
   /* Custom Scrollbar - Heller Stil */
   scrollbar-width: thin;
   scrollbar-color: rgba(var(--primary-rgb), 0.5) rgba(255, 255, 255, 0.05);
 }
 
 /* Custom Scrollbar für Webkit-Browser (Chrome, Safari, Edge) */
-.formWrapper::-webkit-scrollbar {
+.formContent::-webkit-scrollbar {
   width: 8px;
 }
 
-.formWrapper::-webkit-scrollbar-track {
+.formContent::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-full);
   margin: var(--space-md) 0;
 }
 
-.formWrapper::-webkit-scrollbar-thumb {
+.formContent::-webkit-scrollbar-thumb {
   background: rgba(var(--primary-rgb), 0.6);
   border-radius: var(--radius-full);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: background var(--transition-base);
 }
 
-.formWrapper::-webkit-scrollbar-thumb:hover {
+.formContent::-webkit-scrollbar-thumb:hover {
   background: rgba(var(--primary-rgb), 0.8);
 }
 
@@ -633,6 +648,7 @@
   .formWrapper {
     padding: var(--space-xl) var(--space-lg);
     max-height: 85vh;
+    max-height: calc(100svh - 2 * var(--space-sm));
   }
 
   .closeButton {
@@ -680,12 +696,14 @@
   .modalContent {
     max-width: 100%;
     max-height: 100vh;
+    max-height: 100svh;
     border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
   }
 
   .formWrapper {
     padding: var(--space-lg) var(--space-md);
     max-height: 95vh;
+    max-height: 95svh;
     border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-bottom: none;
@@ -698,11 +716,11 @@
   }
   
   /* Mobile Scrollbar */
-  .formWrapper::-webkit-scrollbar {
+  .formContent::-webkit-scrollbar {
     width: 6px;
   }
   
-  .formWrapper::-webkit-scrollbar-thumb {
+  .formContent::-webkit-scrollbar-thumb {
     background: rgba(var(--primary-rgb), 0.6);
   }
 

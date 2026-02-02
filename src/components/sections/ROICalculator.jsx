@@ -427,9 +427,8 @@ export default function ROICalculator() {
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            <Button onClick={openModal} size="lg" className={styles.cta}>
+            <Button onClick={openModal} size="lg" className={styles.cta} iconRight={ArrowRight}>
               Jetzt unabhängig werden
-              <ArrowRight size={20} />
             </Button>
             <p className={styles.ctaSubtext}>
               Kostenlose Analyse für Ihr Hotel in 24h

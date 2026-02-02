@@ -229,22 +229,23 @@ export default function ContactForm() {
             </button>
 
             <div className={styles.formWrapper}>
-          {/* Progress Indicator */}
-          <div className={styles.progress}>
-            <div className={styles.progressBar}>
-              <motion.div
-                className={styles.progressFill}
-                initial={{ width: '0%' }}
-                animate={{ width: `${(step / 5) * 100}%` }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-              />
-            </div>
-            <p className={styles.progressText}>
-              Schritt {step} von 5
-            </p>
-          </div>
+              <div className={styles.formContent}>
+                {/* Progress Indicator */}
+                <div className={styles.progress}>
+                  <div className={styles.progressBar}>
+                    <motion.div
+                      className={styles.progressFill}
+                      initial={{ width: '0%' }}
+                      animate={{ width: `${(step / 5) * 100}%` }}
+                      transition={{ duration: 0.5, ease: 'easeOut' }}
+                    />
+                  </div>
+                  <p className={styles.progressText}>
+                    Schritt {step} von 5
+                  </p>
+                </div>
 
-          <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait">
             {/* STEP 1: Online Marketing Status */}
             {step === 1 && (
               <motion.div
@@ -610,7 +611,8 @@ export default function ContactForm() {
                 </div>
               </motion.div>
             )}
-            </AnimatePresence>
+                </AnimatePresence>
+              </div>
             </div>
           </motion.div>
         </motion.div>

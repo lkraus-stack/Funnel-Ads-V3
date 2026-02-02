@@ -14,17 +14,13 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
-import ThemeToggle from '../ui/ThemeToggle';
 import { useContactModal } from '../../contexts/ContactModalContext';
-import { useTheme } from '../../contexts/ThemeContext';
 import { navContent } from '../../data/content';
 import logoWhite from '../../assets/LogoFrancoConsulting-weiß.png';
-import logoBlack from '../../assets/LogoFrancoConsulting-schwarz.png';
 import styles from './Header.module.css';
 
 export default function Header() {
   const { openModal } = useContactModal();
-  const { theme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -61,7 +57,7 @@ export default function Header() {
         {/* Logo */}
         <a href="/" className={styles.logo}>
           <img 
-            src={theme === 'dark' ? logoWhite : logoBlack} 
+            src={logoWhite} 
             alt={navContent.logo}
             className={styles.logoImage}
           />
@@ -99,9 +95,8 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Desktop CTA & Theme Toggle */}
+        {/* Desktop CTA */}
         <div className={styles.rightActions}>
-          <ThemeToggle />
           <div className={styles.cta}>
             <Button onClick={openModal} size="sm">
               {navContent.cta}
@@ -159,7 +154,6 @@ export default function Header() {
               ))}
             </nav>
             <div className={styles.mobileActions}>
-              <ThemeToggle />
               <Button onClick={() => { openModal(); closeMobileMenu(); }} className={styles.mobileCta}>
                 {navContent.cta}
               </Button>

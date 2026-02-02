@@ -5,22 +5,18 @@
  * Multi-Column Footer mit:
  * - Logo und Beschreibung
  * - Link-Spalten
- * - Social Media Icons
  * - Copyright
  * 
  * Texte aus data/content.js (footerContent)
  */
 import { motion } from 'framer-motion';
-import * as Icons from 'lucide-react';
-import { useTheme } from '../../contexts/ThemeContext';
 import { footerContent } from '../../data/content';
+import { useCookieConsent } from '../../contexts/CookieConsentContext';
 import logoWhite from '../../assets/LogoFrancoConsulting-weiß.png';
-import logoBlack from '../../assets/LogoFrancoConsulting-schwarz.png';
 import styles from './Footer.module.css';
 
 export default function Footer() {
-  const { theme } = useTheme();
-  
+  const { openSettings } = useCookieConsent();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -34,12 +30,6 @@ export default function Footer() {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
-  };
-
-  // Dynamic Icon Component
-  const DynamicIcon = ({ name, ...props }) => {
-    const IconComponent = Icons[name];
-    return IconComponent ? <IconComponent {...props} /> : null;
   };
 
   return (
@@ -56,7 +46,7 @@ export default function Footer() {
           <motion.div className={styles.brandColumn} variants={itemVariants}>
             <a href="/" className={styles.logo}>
               <img 
-                src={theme === 'dark' ? logoWhite : logoBlack} 
+                src={logoWhite} 
                 alt={footerContent.logo}
                 className={styles.logoImage}
               />
@@ -64,22 +54,6 @@ export default function Footer() {
             <p className={styles.description}>
               {footerContent.description}
             </p>
-            
-            {/* Social Icons */}
-            <div className={styles.social}>
-              {footerContent.social.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={styles.socialLink}
-                  aria-label={item.name}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <DynamicIcon name={item.icon} size={20} />
-                </a>
-              ))}
-            </div>
           </motion.div>
 
           {/* Link Columns */}
@@ -98,6 +72,17 @@ export default function Footer() {
                     </a>
                   </li>
                 ))}
+                {column.title === 'Legal' && (
+                  <li>
+                    <button
+                      type="button"
+                      className={styles.linkButton}
+                      onClick={openSettings}
+                    >
+                      Cookie-Einstellungen
+                    </button>
+                  </li>
+                )}
               </ul>
             </motion.div>
           ))}
