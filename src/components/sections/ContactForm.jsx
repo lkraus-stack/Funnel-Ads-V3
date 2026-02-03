@@ -9,7 +9,7 @@
  * - Schritt 3: Marketing Budget
  * - Schritt 4: Kontaktdaten
  */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowRight, 
@@ -36,6 +36,8 @@ export default function ContactForm() {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+  const wasOpenRef = useRef(false);
+  const lastStepRef = useRef(step);
   const [formData, setFormData] = useState({
     hasMarketing: null,
     futureStart: null,
@@ -47,6 +49,59 @@ export default function ContactForm() {
     phone: '',
     privacyAccepted: false,
   });
+
+  const formMeta = useMemo(
+    () => ({
+      form_name: 'kontaktformular',
+      form_id: 'contact_modal',
+    }),
+    []
+  );
+
+  const getStepName = useCallback(() => {
+    if (step === 1) return 'marketing_status';
+    if (step === 2 && formData.hasMarketing === false) return 'future_start';
+    if (step === 2 && formData.hasMarketing === true) return 'improvements';
+    if (step === 3) return 'budget';
+    if (step === 4) return 'contact_details';
+    if (step === 5) return 'success';
+    return 'unknown';
+  }, [formData.hasMarketing, step]);
+
+  const buildStepPayload = useCallback(
+    (override = {}) => ({
+      ...formMeta,
+      form_step: step,
+      form_step_name: getStepName(),
+      has_marketing: formData.hasMarketing,
+      future_start: formData.futureStart,
+      improvements: formData.improvements,
+      budget: formData.budget,
+      ...override,
+    }),
+    [
+      formData.budget,
+      formData.futureStart,
+      formData.hasMarketing,
+      formData.improvements,
+      formMeta,
+      getStepName,
+      step,
+    ]
+  );
+
+  const pushTrackingEvent = useCallback(
+    (eventName, params = {}) => {
+      if (typeof window === 'undefined') return;
+      const payload = buildStepPayload(params);
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: eventName, ...payload });
+      if (window.gtag) {
+        window.gtag('event', eventName, payload);
+      }
+    },
+    [buildStepPayload]
+  );
 
   // Anpassungsmöglichkeiten für bestehende Marketing-Aktivitäten
   const improvementOptions = [
@@ -68,11 +123,13 @@ export default function ContactForm() {
 
   const handleMarketingChoice = (hasMarketing) => {
     setFormData({ ...formData, hasMarketing });
+    pushTrackingEvent('form_step_choice', { has_marketing: hasMarketing });
     setStep(2);
   };
 
   const handleFutureStart = (futureStart) => {
     setFormData({ ...formData, futureStart });
+    pushTrackingEvent('form_step_choice', { future_start: futureStart });
     setStep(3);
   };
 
@@ -81,16 +138,19 @@ export default function ContactForm() {
       ? formData.improvements.filter(id => id !== improvementId)
       : [...formData.improvements, improvementId];
     setFormData({ ...formData, improvements });
+    pushTrackingEvent('form_step_choice', { improvements });
   };
 
   const handleContinueToStep3 = () => {
     if (formData.improvements.length > 0) {
+      pushTrackingEvent('form_step_continue', { improvements: formData.improvements });
       setStep(3);
     }
   };
 
   const handleBudgetChoice = (budget) => {
     setFormData({ ...formData, budget });
+    pushTrackingEvent('form_step_choice', { budget });
     setStep(4);
   };
 
@@ -98,6 +158,7 @@ export default function ContactForm() {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitError(null);
+    pushTrackingEvent('form_submit');
 
     try {
       const response = await fetch('/api/contact', {
@@ -115,9 +176,11 @@ export default function ContactForm() {
       }
 
       // Erfolgreich gesendet
+      pushTrackingEvent('form_submit_success');
       setStep(5); // Erfolgsseite
     } catch (error) {
       console.error('Form submission error:', error);
+      pushTrackingEvent('form_submit_error', { error_message: error.message || 'unknown' });
       setSubmitError(error.message || 'Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.');
     } finally {
       setIsSubmitting(false);
@@ -140,6 +203,24 @@ export default function ContactForm() {
       document.body.style.overflow = 'unset';
     };
   }, [isOpen, closeModal]);
+
+  useEffect(() => {
+    if (isOpen && !wasOpenRef.current) {
+      lastStepRef.current = null;
+      pushTrackingEvent('form_open');
+    }
+    if (!isOpen && wasOpenRef.current) {
+      pushTrackingEvent('form_close');
+    }
+    wasOpenRef.current = isOpen;
+  }, [isOpen, pushTrackingEvent]);
+
+  useEffect(() => {
+    if (isOpen && lastStepRef.current !== step) {
+      lastStepRef.current = step;
+      pushTrackingEvent('form_step_view');
+    }
+  }, [step, isOpen, pushTrackingEvent]);
 
   // Formular zurücksetzen beim Öffnen
   useEffect(() => {

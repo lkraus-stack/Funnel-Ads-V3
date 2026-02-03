@@ -11,7 +11,7 @@ const defaultConsent = {
   marketing: false,
 };
 
-const consentToGtmMode = (consent) => ({
+const consentToGoogleMode = (consent) => ({
   ad_storage: consent.marketing ? 'granted' : 'denied',
   analytics_storage: consent.statistics ? 'granted' : 'denied',
   functionality_storage: 'granted',
@@ -37,10 +37,12 @@ const ensureGtag = () => {
   }
 };
 
-const pushGtmConsent = (consent, type = 'update') => {
+const pushGoogleConsent = (consent, type = 'update') => {
   if (typeof window === 'undefined') return;
   ensureGtag();
-  window.gtag('consent', type, consentToGtmMode(consent));
+  const base = consentToGoogleMode(consent);
+  const payload = type === 'default' ? { ...base, wait_for_update: 500 } : base;
+  window.gtag('consent', type, payload);
 };
 
 const loadGtm = () => {
@@ -48,8 +50,6 @@ const loadGtm = () => {
   if (document.getElementById('gtm-script')) return;
 
   ensureGtag();
-  window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-
   const script = document.createElement('script');
   script.id = 'gtm-script';
   script.async = true;
@@ -91,21 +91,20 @@ export function CookieConsentProvider({ children }) {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {
+    ensureGtag();
+    pushGoogleConsent(defaultConsent, 'default');
+    loadGtm();
     const stored = readStoredConsent();
 
     if (stored) {
       setConsent(stored);
       setHasChoice(true);
       setIsBannerVisible(false);
-      pushGtmConsent(stored, 'update');
-      if (stored.marketing || stored.statistics) {
-        loadGtm();
-      }
+      pushGoogleConsent(stored, 'update');
       return;
     }
 
     setIsBannerVisible(true);
-    pushGtmConsent(defaultConsent, 'default');
   }, []);
 
   const applyConsent = (nextConsent) => {
@@ -115,11 +114,7 @@ export function CookieConsentProvider({ children }) {
     setIsBannerVisible(false);
     setIsSettingsOpen(false);
     writeStoredConsent(normalized);
-    pushGtmConsent(normalized, 'update');
-
-    if (normalized.marketing || normalized.statistics) {
-      loadGtm();
-    }
+    pushGoogleConsent(normalized, 'update');
   };
 
   const acceptAll = () => applyConsent({ statistics: true, marketing: true });
