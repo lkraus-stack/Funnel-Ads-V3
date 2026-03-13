@@ -16,6 +16,7 @@
   justify-content: center;
   overflow: hidden;
   padding: var(--space-2xl) var(--space-sm);
+  background-color: var(--bg-darker);
 }
 
 @media (min-width: 640px) {
@@ -39,6 +40,43 @@
 /* ========================================
    BACKGROUND EFFECTS
    ======================================== */
+.bgImage {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/hero/hotel-hero.png');
+  background-size: cover;
+  background-position: center 45%;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+  transform: scale(1.03);
+}
+
+@media (max-width: 767px) {
+  .bgImage {
+    background-position: 58% 45%;
+    transform: scale(1.08);
+  }
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(4, 6, 9, 0.72) 0%, rgba(4, 6, 9, 0.84) 100%),
+    radial-gradient(circle at 50% 25%, rgba(var(--primary-rgb), 0.12) 0%, transparent 50%);
+}
+
+@media (max-width: 767px) {
+  .bgOverlay {
+    background:
+      linear-gradient(180deg, rgba(4, 6, 9, 0.78) 0%, rgba(4, 6, 9, 0.9) 100%),
+      radial-gradient(circle at 50% 20%, rgba(var(--primary-rgb), 0.1) 0%, transparent 45%);
+  }
+}
+
 .bgGradient {
   position: absolute;
   inset: 0;
@@ -58,6 +96,7 @@
       rgba(var(--accent-rgb), 0.05),
       transparent 40%
     );
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -75,8 +114,10 @@
     transparent 60%
   );
   filter: blur(60px);
+  z-index: 3;
   pointer-events: none;
   animation: pulse 8s ease-in-out infinite;
+  opacity: 0.7;
 }
 
 @media (min-width: 640px) {
@@ -114,8 +155,19 @@
     linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
+  z-index: 4;
   mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+}
+
+@media (max-width: 767px) {
+  .bgGrid {
+    opacity: 0.6;
+  }
+
+  .bgGlow {
+    opacity: 0.5;
+  }
 }
 
 /* ========================================
@@ -126,7 +178,7 @@
   margin: 0 auto;
   text-align: center;
   position: relative;
-  z-index: 1;
+  z-index: 5;
   padding: 0 var(--space-sm);
 }
 
@@ -198,19 +250,74 @@
    ======================================== */
 .subtitle {
   font-size: clamp(var(--text-base), 2.5vw, var(--text-xl));
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.9);
   max-width: 700px;
-  margin: 0 auto var(--space-xl);
+  margin: 0 auto var(--space-lg);
   line-height: var(--leading-relaxed);
   padding: 0 var(--space-sm);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
 }
 
 @media (min-width: 768px) {
   .subtitle {
     font-size: clamp(var(--text-lg), 2.5vw, var(--text-xl));
-    margin: 0 auto var(--space-2xl);
+    margin: 0 auto var(--space-xl);
     padding: 0;
   }
+}
+
+/* ========================================
+   EXPERTISE BUTTONS
+   ======================================== */
+.expertiseButtons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin: 0 auto var(--space-xl);
+  max-width: 860px;
+  padding: 0 var(--space-xs);
+}
+
+.expertiseButton {
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  background:
+    linear-gradient(155deg, rgba(var(--primary-rgb), 0.22) 0%, rgba(255, 255, 255, 0.06) 100%);
+  color: var(--text-primary);
+  border-radius: var(--radius-full);
+  padding: 0.85rem 1.35rem;
+  font-size: clamp(0.92rem, 1.5vw, 1.05rem);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  box-shadow:
+    0 10px 28px rgba(4, 6, 9, 0.42),
+    0 0 0 1px rgba(var(--primary-rgb), 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+  cursor: pointer;
+}
+
+.expertiseButton:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: rgba(var(--primary-rgb), 0.82);
+  background:
+    linear-gradient(150deg, rgba(var(--primary-rgb), 0.36) 0%, rgba(var(--accent-rgb), 0.2) 100%);
+  box-shadow:
+    0 16px 36px rgba(2, 4, 8, 0.55),
+    0 0 0 2px rgba(var(--primary-rgb), 0.52),
+    0 0 34px rgba(var(--primary-rgb), 0.34);
+}
+
+.expertiseButton:focus-visible {
+  outline: 2px solid rgba(var(--primary-rgb), 0.85);
+  outline-offset: 3px;
+  transform: translateY(-2px);
 }
 
 /* ========================================
@@ -280,13 +387,28 @@
 
 .statLabel {
   font-size: var(--text-sm);
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================
    RESPONSIVE
    ======================================== */
 @media (max-width: 767px) {
+  .expertiseButtons {
+    gap: 0.6rem;
+    margin-bottom: var(--space-lg);
+    padding: 0 var(--space-sm);
+  }
+
+  .expertiseButton {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+    padding: 0.95rem 1.1rem;
+    font-size: 0.98rem;
+  }
+
   .ctas {
     flex-direction: column;
     align-items: stretch;

@@ -52,8 +52,8 @@
      TEXT-FARBEN
      ======================================== */
   --text-primary: #ffffff;     /* Haupttext - Weiß */
-  --text-secondary: #a1a1aa;   /* Sekundärtext - Grau */
-  --text-muted: #71717a;       /* Gedämpfter Text */
+  --text-secondary: #bfc2cd;   /* Sekundärtext - heller für besseren Kontrast */
+  --text-muted: #989cab;       /* Gedämpfter Text - besser lesbar auf dunklem Hintergrund */
   --text-inverse: #0a0a0f;     /* Invertierter Text (auf hellen Buttons) */
 
   /* ========================================

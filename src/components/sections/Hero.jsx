@@ -22,6 +22,12 @@ import styles from './Hero.module.css';
 
 export default function Hero() {
   const { openModal } = useContactModal();
+  const expertiseButtons = [
+    'Google Ads',
+    'Meta Ads',
+    'Tracking & Attribution',
+    'Direktbuchungsquote',
+  ];
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -45,6 +51,8 @@ export default function Hero() {
   return (
     <section className={styles.hero}>
       {/* Background Effects */}
+      <div className={styles.bgImage} />
+      <div className={styles.bgOverlay} />
       <div className={styles.bgGradient} />
       <div className={styles.bgGlow} />
       <div className={styles.bgGrid} />
@@ -70,6 +78,19 @@ export default function Hero() {
         <motion.p className={styles.subtitle} variants={itemVariants}>
           {heroContent.subtitle}
         </motion.p>
+
+        <motion.div className={styles.expertiseButtons} variants={itemVariants}>
+          {expertiseButtons.map((buttonLabel) => (
+            <button
+              key={buttonLabel}
+              type="button"
+              className={styles.expertiseButton}
+              aria-label={buttonLabel}
+            >
+              {buttonLabel}
+            </button>
+          ))}
+        </motion.div>
 
         {/* CTA Buttons */}
         <motion.div className={styles.ctas} variants={itemVariants}>
